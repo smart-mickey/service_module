@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -1138,7 +1137,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bryan Folsom (M4279U9KN9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bryan Folsom (FG7NMX682X)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M4279U9KN9;
@@ -1150,10 +1149,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nexmo.dis;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.nexmo;
 				PRODUCT_NAME = servicemodule;
-				PROVISIONING_PROFILE = "d96bdc71-3246-4f6c-91e6-193fc5f50acf";
-				PROVISIONING_PROFILE_SPECIFIER = GPSPushDis;
+				PROVISIONING_PROFILE = "eceba008-5db9-4233-b2b9-cd2b6db714c4";
+				PROVISIONING_PROFILE_SPECIFIER = GPSPushDev1202;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1162,7 +1161,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bryan Folsom (M4279U9KN9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bryan Folsom (FG7NMX682X)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M4279U9KN9;
 				INFOPLIST_FILE = servicemodule/Info.plist;
@@ -1173,10 +1172,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nexmo.dis;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.nexmo;
 				PRODUCT_NAME = servicemodule;
 				PROVISIONING_PROFILE = "eceba008-5db9-4233-b2b9-cd2b6db714c4";
-				PROVISIONING_PROFILE_SPECIFIER = GPSPushDis;
+				PROVISIONING_PROFILE_SPECIFIER = GPSPushDev1202;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

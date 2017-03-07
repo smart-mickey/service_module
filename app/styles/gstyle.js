@@ -4,7 +4,6 @@ var Global_CSS = StyleSheet.create({
     
     VContainer: {
         flex: 1,
-        flexDirection: 'column'
     },
 
     HContainer: {

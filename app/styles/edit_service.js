@@ -25,7 +25,7 @@ var Edit_Service_CSS = StyleSheet.create({
         padding: 25
     },
 
-    saveButton: {
+    addButtonView: {
         position: 'absolute',
         bottom: 0,
         width: width,
@@ -36,15 +36,16 @@ var Edit_Service_CSS = StyleSheet.create({
 
     borderBottomView: {
         borderBottomWidth: 1,
-        borderColor: '#ababab',
+        borderColor: '#00000020',
         flex: 1,
         justifyContent: 'flex-end'
     },
 
     textInput: {
-        height: 40, 
+        height: 32, 
         color: 'black', 
         fontSize: 16,
+        padding: 6.5,
     },
 
     dinar: {
@@ -66,7 +67,7 @@ var Edit_Service_CSS = StyleSheet.create({
         flex: 1,
         borderTopWidth: 0.5,
         borderRightWidth: 0.5,
-        borderBottomWidth: 2,
+        borderBottomWidth: 3,
         justifyContent: 'center',
         borderTopColor: '#ababab',
         borderRightColor: '#ababab',
@@ -84,10 +85,31 @@ var Edit_Service_CSS = StyleSheet.create({
         borderBottomColor: '#ababab'
     },
 
+    saveButtonView: {
+        position: 'absolute',
+        bottom: 0,
+        width: width,
+        height: 60,
+        backgroundColor: '#339433',
+        justifyContent: 'center'
+    },
+    
     saveButtonText: {
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 16,
         color: 'white'
+    },
+
+    selectedTypeText: {
+        textAlign: 'center', 
+        color: '#b900f0', 
+        fontSize: 14
+    },
+
+    defaultTypeText: {
+        textAlign: 'center', 
+        color: '#d3dce8', 
+        fontSize: 14
     }
 
 

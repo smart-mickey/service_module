@@ -9,6 +9,9 @@ import NavigationBar from 'react-native-navbar';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Switch from 'react-native-material-switch';
 import Panel from '../components/panel.js'
+import NavBar from '../components/navbar';
+import SwitchView from '../components/switch'
+
 const {
   Alert,
   TextInput,
@@ -39,19 +42,23 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,});
 var userdatas = [
                 {
                     name: 'Nicklas Olsson',
-                    image: User1
+                    image: User1,
+                    active: true
                 },
                 {
                     name: 'Julia Cabania',
-                    image: User2
+                    image: User2,
+                    active: false
                 },
                 {
                     name: 'Jake Andreson',
-                    image: User3
+                    image: User3,
+                    active: true
                 },
                 {
                     name: 'Joris Loos',
-                    image: User4
+                    image: User4,
+                    active: false
                 }
             ];
 class Stylists extends React.Component {
@@ -88,14 +95,10 @@ class Stylists extends React.Component {
     render() {
         return(
             <View style={style.background}>
-                <View style={style.statuBar}/>
-                <View style={style.header}>
-                    <TouchableOpacity style={style.backView} onPress={() => {Actions.pop()}}>
-                        <Image style={style.backButton} source={back}/>
-                        <Text style={style.headerText} >Stylists</Text>
-                    </TouchableOpacity>
-                </View>
+                <NavBar height={54} title='Stylist' textColor='#47556c' source={back} bgColor='transparent'/>
+             
                 <View style={style.listView}>
+                   
                     {
                         userdatas.length == 0?
                             this.showEmptyView()
@@ -103,53 +106,48 @@ class Stylists extends React.Component {
                             <ListView
                                 dataSource = {this.state.dataSource}
                                 enableEmptySections = {true}
-                                renderRow = {(rowData) => {
+                                renderRow = {(rowData, sectionID, rowID, highlightRow) => {
                                     
 
                                     return(            
                                         <View style={style.listItem}> 
                                             <Panel title={this.ListItemHeader(rowData)} data={rowData} handle={this}>
                                         
-                                                <View style={{flexDirection: 'row'}}>
+                                                <View style={{flexDirection: 'row',height: 48}}>
 
-                                                    <View style={{flex: 0.2, justifyContent: 'center', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
+                                                    <View style={{flex: 0.2, borderTopWidth: 0.5,justifyContent: 'center', alignItems: 'center', borderRightWidth: 0.5, borderColor: '#ababab'}}>
                                                         <TouchableOpacity onPress={() => {this.onEditService(rowData)}}>
-                                                            <View style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, justifyContent: 'center' }}>
-                                                                <View style={style.editIconView}>
-                                                                    <Image style={style.iconImage} source={edit_service}/>
-                                                                </View>
-                                                                <Text style={style.iconText}>Edit</Text>
+                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                                                                <Image style={style.iconImage} source={edit_service}/>
+                                                                <Text style={style.iconText}>EDIT</Text>
                                                             </View>
                                                         </TouchableOpacity>
                                                     </View>
 
-                                                    <View style={{flex: 0.3, justifyContent: 'center', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
+                                                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
                                                         <TouchableOpacity onPress={() => {this.onDeleteConfirm(rowData)}}>
-                                                            <View style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, justifyContent: 'center'}}>
-                                                                <View style={style.editIconView}>
-                                                                    <Image style={style.iconImage} source={delete_service}/>
-                                                                </View>
-                                                                <Text style={[style.iconText, {color: 'red'}]}>Delete</Text>
+                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                                                                <Image style={style.iconImage} source={delete_service}/>
+                                                                <Text style={[style.iconText, {color: 'red'}]}>DELETE</Text>
                                                             </View>
                                                         </TouchableOpacity>
                                                     </View>
 
-                                                    <View style={{flex: 0.5, justifyContent: 'center', borderTopWidth: 0.5, borderColor: '#ababab'}}>
-                                                        <View style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, justifyContent: 'center'}}>
+                                                    <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderColor: '#ababab'}}>
                                                             <Text style={style.switchText}>{rowData.active?'AVAILABLE':'UNAVILABLE'}</Text>
-                                                            <View style={[style.editIconView, {padding: 5}]}>
-                                                                <Switch 
-                                                                    switchHeight = {10}
-                                                                    switchWidth = {30}
-                                                                    buttonRadius = {10}
-                                                                    activeButtonColor='#1FbF55' 
-                                                                    activeBackgroundColor='#8FDFAA' 
-                                                                    inactiveButtonColor='#FAFAFA' 
-                                                                    inactiveBackgroundColor='#rgba(200,200,200,.5)' 
-                                                                    active={rowData.active} 
-                                                                    onChangeState={(state)=>{this.onChangeCategoryActiveState(rowID, state)}}/>
+                                                            <View style={style.SwitchView}>
+                                                                <SwitchView 
+                                                                    switchWidth={22}
+                                                                    switchHeight={8}
+                                                                    buttonRadius={7}
+                                                                    activeButtonColor='#1FbF55'
+                                                                    inactiveButtonColor='#rgba(200,200,200,.7)'
+                                                                    activeSwitchColor='#8FDFAA' 
+                                                                    inactiveSwitchColor='#rgba(200,200,200,.4)'
+                                                                    active={rowData.active}
+                                                                    onPress={(state)=>{this.onChangeCategoryActiveState(rowID, state)}}
+                                                                    />
                                                             </View>                                                    
-                                                        </View>
                                                     </View>
                                                 </View>     
                                             
@@ -206,17 +204,16 @@ class Stylists extends React.Component {
                     offset = {0}
                     open = {this.state.delete_stylist}
                     modalDidOpen = {() => console.log('modal did open')}
-                    modalDidClose = {() => this.setState({delete_stylist: false})}
-                    style = {{alignItems: 'center'}}>
-                    <View>
-                        <Text style={{padding: 10, fontSize: 20, fontWeight: 'bold'}}>Confirm Delete</Text>
-                        <Text style={{padding: 10, color: 'gray'}}>Are you sure you want to delete <Text style={{color: 'black'}}>{this.state.selected_stylist.name}</Text> from stylists list?</Text>
-                        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                    modalDidClose = {() => this.setState({delete_stylist: false})}>
+                    <View style = {{padding: 14, paddingBottom: 2}}>
+                        <Text style={{fontSize: 16, fontWeight: 'bold'}}>Confirm Delete</Text>
+                        <Text style={{marginTop: 15, color: '#b9b9b9'}}>Are you sure you want to delete <Text style={{color: 'black'}}>{this.state.selected_stylist.name}</Text> from stylists list?</Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 24, height: 36}}>
                             <TouchableOpacity onPress={()=>{this.setState({delete_stylist: false})}}>
-                                <Text style={{color:'gray', padding: 10}}>CLOSE</Text>
+                                <Text style={{color:'#b9b9b9', fontSize: 14, padding: 10}}>CLOSE</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={()=>{this.onDeleteStylist()}}>
-                                <Text style={{color:'#F78457', padding: 10}}>DELETE</Text>
+                                <Text style={{color:'#E64848', padding: 10}}>DELETE</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -250,6 +247,12 @@ class Stylists extends React.Component {
     onEditSave() {
         alert('Saved Successfully!');
     }
+
+    onChangeCategoryActiveState(index, state) {
+        var data = userdatas[index];
+        data.active = state;
+        this.setState({dataSource:ds.cloneWithRows(userdatas)})
+    }    
 
     takePhoto() {
 

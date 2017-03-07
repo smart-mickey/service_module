@@ -38,7 +38,8 @@ var Stylists_CSS = StyleSheet.create({
     listView: {
         flex: 1,
         padding: 20,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        padding: 16
     },
 
     headerText: {
@@ -55,33 +56,36 @@ var Stylists_CSS = StyleSheet.create({
         },
         shadowColor: 'gray',
         shadowOpacity: 1,
+        marginBottom: 16
     },
 
     stylist: {
         flexDirection: 'row', 
         flex: 1, 
-        padding: 10,
+        height: 56,
+        alignItems: 'center',
+        paddingLeft: 16,
+        paddingRight: 16
         
     },
 
     userImage: {
-        width: 50,
-        height: 50,
-        margin: 10,
+        width: 32,
+        height: 32,
         resizeMode: 'cover',
-        borderRadius: 25
+        borderRadius: 16
     },
 
     userName: {
-        height: 25,
-        fontSize: 18,
+        fontSize: 14,
         textAlign: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: 8
     },
 
     iconImage: {
-        width: 20,
-        height: 20,
+        width: 14,
+        height: 14,
         resizeMode: 'stretch',
         alignSelf: 'stretch'
     },
@@ -90,16 +94,21 @@ var Stylists_CSS = StyleSheet.create({
         width: 20
     },
 
+    SwitchView: {
+        width: 50,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     switchText: {
         fontSize: 12,
-        marginRight: 15,
-        padding: 5
+        marginRight: 14,
     },
 
     iconText: {
         fontSize: 12,
-        padding: 5,
-        marginLeft: 5
+        marginLeft: 6
     },
 
     AddServiceIconView: {

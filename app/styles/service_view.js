@@ -3,11 +3,17 @@ var {StyleSheet, Dimensions} = React
 var width = Dimensions.get('window').width;
 var Service_View_CSS = StyleSheet.create({
 
-    serviceImage: {
+    serviceImageView: {
+        position: 'absolute',
         width: width,
         height: 200,
+    },
+
+    serviceImage: {
+         width: width,
+        height: 200,
         resizeMode: 'cover',
-        opacity: 0.5
+        opacity: 0.4
     },
 
     AddServiceIconView: {
@@ -43,8 +49,8 @@ var Service_View_CSS = StyleSheet.create({
     },
 
     iconImage: {
-        width: 20,
-        height: 20,
+        width: 14,
+        height: 14,
         resizeMode: 'stretch',
         alignSelf: 'stretch'
     },
@@ -53,10 +59,16 @@ var Service_View_CSS = StyleSheet.create({
         width: 20
     },
 
+    SwitchView: {
+        width: 50,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     switchText: {
         fontSize: 12,
-        marginRight: 15,
-        padding: 5
+        marginRight: 14,
     },
 
     listItem: {
@@ -71,10 +83,20 @@ var Service_View_CSS = StyleSheet.create({
         backgroundColor: 'white'
     },
 
+    serviceCard: {
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowColor: 'gray',
+        shadowOpacity: 1,
+        marginBottom: 12    
+    },
+    
+
     iconText: {
         fontSize: 12,
-        padding: 5,
-        marginLeft: 5
+        marginLeft: 6
     },
 
     backButtonView: {

@@ -17,6 +17,7 @@ import screen_service_view from './app/containers/service_view'
 import screen_add_service from './app/containers/add_service'
 import screen_edit_service from './app/containers/edit_service'
 import screen_stylists from './app/containers/stylists'
+import screen_search_view from './app/containers/searchView'
 const RouterWithRedux = connect()(Router)
 const {
   AppRegistry
@@ -46,6 +47,7 @@ export default class servicemodule extends Component {
           <Scene key='add_service' component={screen_add_service} title='Add Service View'  hideNavBar={true}/>
           <Scene key='edit_service' component={screen_edit_service} title='Edit Service View'  hideNavBar={true}/>
           <Scene key='stylists' component={screen_stylists} title='Stylist View'  hideNavBar={true}/>
+          <Scene key='searchview' component={screen_search_view} title='Search View'  hideNavBar={true}/>
         </RouterWithRedux>
       </Provider>
     );

@@ -4,55 +4,81 @@ var width = Dimensions.get('window').width;
 var Manage_Service_CSS = StyleSheet.create({
 
     text: {
-        fontSize: 10
+        fontSize: 12,
+        color: '#47556c'
     },
 
     Header: {
-        height: 70,
+        height: 32,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        paddingTop: 20
+        marginTop: 20,
+        alignItems:'center',
+        margin: 12,
+        marginBottom: 28
+    },
+
+    backButton: {
+        width: 32,
+        height: 32,
+        resizeMode: 'stretch',
     },
 
     Stylists: {
-        borderRadius: 3,
+        borderRadius: 1,
         borderWidth: 1,
         borderColor: '#243140',
-        padding: 5,
-        margin: 10
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginRight: 16
+    },
+
+    SwitchView: {
+        width: 50,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     searchImage: {
-        width: 20,
-        height: 20,
+        width: 32,
+        height: 32,
         resizeMode: 'stretch',
         alignSelf: 'stretch',
-        margin: 10
     },
 
     ServiceImage: {
-        width: width / 2 - 30,
-        height: width / 2 - 30,
+        width: width / 2 - 18,
+        height: width / 2 - 18,
         resizeMode: 'cover',
         borderRadius: 10
     },
 
     EditServiceImage: {
-        resizeMode: 'contain',
         height: 150,
-        width: width - 60
+        width: width - 88,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    NewImage: {
+        height: 50,
+        width: 70,
+        resizeMode: 'stretch'
     },
 
     addServiceImage: {
-        width: width / 2 - 30,
-        height: width / 2 - 30,
+        width: width / 2 - 18,
+        height: width / 2 - 18,
         resizeMode: 'contain'
     },
 
     ServiceName: {
         color: '#243140',
-        fontSize: 20,
-        padding: 5,
+        fontSize: 18,
+        padding: 4,
     },
 
     ListView: {
@@ -64,8 +90,7 @@ var Manage_Service_CSS = StyleSheet.create({
     },
 
     ModalView: {
-        backgroundColor: 'white', 
-        padding: 5,         
+        backgroundColor: 'transparent', 
     },
 
     ModalTitle: {
@@ -80,10 +105,17 @@ var Manage_Service_CSS = StyleSheet.create({
         fontSize: 25,
     },
 
-    editCategory: {
+    editIconView: {
         position: 'absolute',
-        right: 5,
-        top: 5,        
+        right: 4,
+        top: 4,       
+    },
+
+    editIcon: {
+        width: 30,
+        height: 30,
+        alignSelf: 'stretch',
+        resizeMode: 'stretch'      
     },
 
     EditCategoryIcon: {
@@ -112,9 +144,6 @@ var Manage_Service_CSS = StyleSheet.create({
         paddingLeft: 5
     },
 
-    editIconView: {
-        width: 40
-    }
 
 	
 })

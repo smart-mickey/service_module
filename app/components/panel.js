@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet,Text,View,Image,TouchableHighlight,Animated} from 'react-native';
+import {StyleSheet,Text,View,Image,TouchableOpacity, TouchableHighlight,Animated} from 'react-native';
 class Panel extends Component{
     constructor(props){
         super(props);
@@ -64,18 +64,9 @@ class Panel extends Component{
         return (
             <Animated.View 
                 style={[styles.container,{height: this.state.animation}]}>
-                <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
+                <TouchableOpacity onPress={this.toggle.bind(this)} style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
                     {this.state.title}
-                    <TouchableHighlight 
-                        style={styles.button} 
-                        onPress={this.toggle.bind(this)}
-                        underlayColor="#f1f1f1">
-                        <Image
-                            style={styles.buttonImage}
-                            source={icon}
-                        ></Image>
-                    </TouchableHighlight>
-                </View>
+                </TouchableOpacity>
                 
                 <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
                     {this.props.children}
@@ -89,8 +80,7 @@ class Panel extends Component{
 var styles = StyleSheet.create({
     container   : {
         backgroundColor: '#fff',
-        margin:10,
-        overflow:'hidden'
+        overflow:'hidden',
     },
     titleContainer : {
         flexDirection: 'row'
@@ -106,8 +96,8 @@ var styles = StyleSheet.create({
         padding: 10
     },
     buttonImage : {
-        width   : 30,
-        height  : 25
+        width   : 28,
+        height  : 28
     },
     body        : {
         

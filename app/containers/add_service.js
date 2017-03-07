@@ -8,6 +8,8 @@ import Modal from 'react-native-simple-modal';
 import NavigationBar from 'react-native-navbar';
 import ModalDropdown from 'react-native-modal-dropdown';
 import NavBar from '../components/navbar';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
+
 const {
   Alert,
   TextInput,
@@ -17,7 +19,9 @@ const {
   Image,
   Button,
   ListViewm,
-  Dimensions
+  Dimensions,
+  Animated,
+  ScrollView
 } = ReactNative;
 var style = require('../styles/add_service');
 var gstyle = require('../styles/gstyle'); 
@@ -38,6 +42,10 @@ class Add_Service extends React.Component {
             userType: 'all'
         }
     }
+    _scrollToInput (reactNode) {
+    // Add a 'scroll' ref to your ScrollView
+      this.refs.scroll.scrollToFocusedInput(reactNode)
+    }
 
     render() {
         const leftButtonConfig = {
@@ -50,31 +58,34 @@ class Add_Service extends React.Component {
                 Actions.pop();
             },
         };
+        var _this = this;
         return(
-            <View style={{flex: 1, position: 'relative', backgroundColor: '#F5F5F5'}}>
-                <NavBar height={72} title='Add Service' source={back_white} bgColor='#394355'/>
-                <View style={style.editView}>
-                    <View style={style.editForm}>
-                        <View style={{flex: 0.15, justifyContent: 'center'}}>
+            <View style={{flex: 1, position: 'relative', backgroundColor: '#f3f7f8'}}>
+                <NavBar height={56} textColor='white' title='Add Service' source={back_white} bgColor='#394355'/>
+                
+                <View style={{padding: 16, backgroundColor: '#f3f7f8', flex: 1, marginBottom: 56}}>
+                    <View style={{paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, flex: 1,shadowColor: 'gray', shadowOpacity: 1}}>
+                        <KeyboardAwareView style={{flex: 0.64}}>
+                        <View style={{flex: 0.16, justifyContent: 'flex-end', paddingBottom: 8}}>
+                            <View style={{height: 14}}>
+                                <Text style={{fontSize: 12, marginBottom: 8, color: '#ababab'}}>Service Name</Text>
+                            </View>
                             <View style={style.borderBottomView}>
                                 <TextInput
                                     style = {style.textInput}
-                                    placeholder = "Service Name"
-                                    placeholderTextColor = "gray"
                                     underlineColorAndroid='transparent'
                                     onChangeText = {(Text) => this.setState({serviceName: Text})}
                                     value = {this.state.serviceName}
                                 />
                             </View>
                         </View>
-                        <View style={{flex: 0.15, flexDirection: 'row'}}>
-                            <View style={{flex: 0.06, flexDirection: 'row', alignItems: 'flex-end'}}>
-                                <View>
-                                    <Text style={style.dinar}>{'\u20B9'}</Text>
-                                </View>
-                                <View style={style.borderBottomView}>
+                        <View style={{flex: 0.16, paddingBottom: 8, flexDirection: 'row'}}>
+                            <View style={{flex: 0.07, padding: 6.5, justifyContent: 'flex-end', flexDirection: 'column'}}>
+                                <View style={{height: 32, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Text style={{fontSize: 14, color: '#5c5c5c'}}>{'\u20B9'}</Text>
+                                    <View style={{borderBottomWidth: 0.5, borderColor: '#00000020', flex: 1}}>
                                     <TextInput
-                                        style = {style.textInput}
+                                        style={style.textInput}
                                         placeholder = "Price"
                                         placeholderTextColor = "gray"
                                         underlineColorAndroid='transparent'
@@ -83,27 +94,33 @@ class Add_Service extends React.Component {
                                         maxLength = {10}
                                         value = {this.state.price}
                                     />
+                                    </View>
                                 </View>
+                                
                             </View>
-                            <View style={{flex: 0.09, flexDirection: 'row', alignItems: 'flex-end', paddingLeft: 10}}>
-                                <View>
-                                    <Text style={style.dinar}>{'\u20B9'}</Text>
-                                </View>
-                                <View style={style.borderBottomView}>
+                            <View style={{flex: 0.09, padding: 6.5, justifyContent: 'flex-end', flexDirection: 'column'}}>
+                                <View style={{height: 32, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Text style={{fontSize: 14, color: '#5c5c5c'}}>{'\u20B9'}</Text>
+                                    <View style={{borderBottomWidth: 0.5, borderColor: '#00000020', flex: 1}}>
                                     <TextInput
-                                        style = {style.textInput}
+                                        style={style.textInput}
                                         placeholder = "Discounted Price"
                                         placeholderTextColor = "gray"
                                         underlineColorAndroid='transparent'
-                                        onChangeText = {(Text) => this.setState({disprice: Text})}
+                                        onChangeText = {(Text) => this.setState({disprice: this.onChanged(Text)})}
                                         keyboardType = 'numeric'
                                         maxLength = {10}
                                         value = {this.state.disprice}
                                     />
+                                    </View>
                                 </View>
+                                
                             </View>
                         </View>
-                        <View style={{flex: 0.15, position: 'relative'}}>
+                        <View style={{flex: 0.16, justifyContent: 'flex-end', paddingBottom: 8}}>
+                            <View style={{height: 14}}>
+                                <Text style={{fontSize: 12, marginBottom: 8, color: '#ababab'}}>Approx. time taken</Text>
+                            </View>
                             <View style={style.borderBottomView}>
                                 <ModalDropdown 
                                     options={data}
@@ -128,10 +145,11 @@ class Add_Service extends React.Component {
                                 </ModalDropdown>
                             </View>
                         </View>
-                        <View style={{flex: 0.15}}>
+                        <View style={{flex: 0.16}}>
                             <View style={style.borderBottomView}>
                                 <TextInput
                                     style = {style.textInput}
+                                   
                                     placeholder = "Describe the item"
                                     placeholderTextColor = "gray"
                                     underlineColorAndroid='transparent'
@@ -140,7 +158,8 @@ class Add_Service extends React.Component {
                                 />
                             </View>
                         </View>
-                        <View style={{flex: 0.15}}>
+                        </KeyboardAwareView>
+                        <View style={{flex: 0.16}}>
                             <Text style={{paddingTop: 10, fontSize: 12, color: 'lightgray'}}>Category</Text>
                             <View style={style.borderBottomView}>
                                 <ModalDropdown 
@@ -167,18 +186,21 @@ class Add_Service extends React.Component {
                                 </ModalDropdown>
                             </View>
                         </View>
-                        <View style={{flex: 0.25}}>
+                        <View style={{flex: 0.2}}>
                             <Text style={{paddingTop: 10, fontSize: 12, color: 'lightgray'}}>This service is for</Text>
-                            <View style={{flex: 1, flexDirection: 'row', borderLeftWidth: 0.5, borderColor: '#ababab', marginTop: 20}}>
+                            <View style={{flex: 1, flexDirection: 'row', borderLeftWidth: 0.5, borderColor: '#ababab', marginTop: 5}}>
                                 <View style={{flex: 0.33}}>
                                         {
+                                            /*<View style={{flex: 0.33}}>
+                                                    <MarkButton text='All' border={[0,1]} borderColor='#ababab' textColor='#d3dce8' markColor='#b900f0' markWidth={4} mark={this.state.userType == 'all'?true:false} onPress={() => {this.setState({userType: 'all'})}} />
+                                            </View>*/
                                           this.state.userType == 'all'?
                                           <TouchableOpacity style={style.selectedType} onPress={() => {this.setState({userType: 'all'})}}>
-                                              <Text style={{textAlign: 'center', color: '#b900f0'}}>All</Text>
+                                              <Text style={{textAlign: 'center', color: '#b900f0', fontSize: 14}}>All</Text>
                                           </TouchableOpacity>
                                           :
                                           <TouchableOpacity style={style.defaultType} onPress={() => {this.setState({userType: 'all'})}}>
-                                              <Text style={{textAlign: 'center', color: '#d3dce8'}}>All</Text>
+                                              <Text style={{textAlign: 'center', color: '#d3dce8', fontSize: 14}}>All</Text>
                                           </TouchableOpacity>
                                         }                                        
                                 </View>
@@ -186,11 +208,11 @@ class Add_Service extends React.Component {
                                         {
                                           this.state.userType == 'men'?
                                           <TouchableOpacity style={style.selectedType} onPress={() => {this.setState({userType: 'men'})}}>
-                                              <Text style={{textAlign: 'center', color: '#b900f0'}}>Men</Text>
+                                              <Text style={{textAlign: 'center', color: '#b900f0', fontSize: 14}}>Men</Text>
                                           </TouchableOpacity>
                                           :
                                           <TouchableOpacity style={style.defaultType} onPress={() => {this.setState({userType: 'men'})}}>
-                                              <Text style={{textAlign: 'center', color: '#d3dce8'}}>Men</Text>
+                                              <Text style={{textAlign: 'center', color: '#d3dce8', fontSize: 14}}>Men</Text>
                                           </TouchableOpacity>
                                         }               
                                 </View>
@@ -198,23 +220,26 @@ class Add_Service extends React.Component {
                                         {
                                           this.state.userType == 'women'?
                                           <TouchableOpacity style={style.selectedType} onPress={() => {this.setState({userType: 'women'})}}>
-                                              <Text style={{textAlign: 'center', color: '#b900f0'}}>Women</Text>
+                                              <Text style={{textAlign: 'center', color: '#b900f0', fontSize: 14}}>Women</Text>
                                           </TouchableOpacity>
                                           :
                                           <TouchableOpacity style={style.defaultType} onPress={() => {this.setState({userType: 'women'})}}>
-                                              <Text style={{textAlign: 'center', color: '#d3dce8'}}>Women</Text>
+                                              <Text style={{textAlign: 'center', color: '#d3dce8', fontSize: 14}}>Women</Text>
                                           </TouchableOpacity>
                                         }               
                                 </View>
                             </View>
+                            
                         </View>
+                        
                     </View>
                 </View>
-                <View style={style.saveButton}>
-                    <TouchableOpacity onPress={() => {alert('Added successfully!')}}>
-                        <Text style={style.saveButtonText}>ADD SERVICE</Text>
+                <View style={style.addButtonView}>
+                    <TouchableOpacity onPress={() => {alert('Saved successfully!')}}>
+                        <Text style={style.addButtonText}>ADD SERVICE</Text>
                     </TouchableOpacity>
                 </View>
+                
             </View>
         )
     }

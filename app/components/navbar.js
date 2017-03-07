@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform
 } from 'react-native';
 import {Actions} from 'react-native-router-flux'
 
@@ -20,14 +21,15 @@ class NavBar extends Component{
         
         return (
             <View>
+                {Platform.OS === 'android'?
+                null:
                 <View style={style.statuBar}/>
-                <View style={{height: this.props.height, backgroundColor: this.props.bgColor, flexDirection: 'row'}}>
-                    <TouchableOpacity style={style.backView} onPress={() => {Actions.pop()}}>
+                }
+                <View style={{height: this.props.height, backgroundColor: this.props.bgColor, flexDirection: 'row', padding: 16, alignItems: 'center'}}>
+                    <TouchableOpacity onPress={() => {Actions.pop()}}>
                         <Image style={style.backButton} source={this.props.source}/>
                     </TouchableOpacity>
-                    <View style={style.titleView}>
-                        <Text style={style.headerText} >{this.props.title}</Text>
-                    </View>
+                    <Text style={[style.headerText, {color: this.props.textColor}]} >{this.props.title}</Text>
                 </View>
             </View>
         );
@@ -36,26 +38,22 @@ class NavBar extends Component{
 
 var style = StyleSheet.create({
    statuBar: {
-        height: 20,
+        height: 24,
         backgroundColor: '#263041',
     },    
 
     backButton: {
-        width: 40,
-        height: 40,
+        width: 24,
+        height: 24,
         resizeMode: 'stretch',
         alignSelf: 'stretch'
     },
 
     headerText: {
-        color: 'white', 
+        color: 'white',
         textAlign: 'center', 
-        fontSize: 20,
-        padding: 20,
-    },
-
-    titleView: {
-        justifyContent: 'center'
+        fontSize: 16,
+        marginLeft: 16
     },
 
     backView: {
