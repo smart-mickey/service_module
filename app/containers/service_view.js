@@ -58,7 +58,8 @@ class ServiceTap extends React.Component {
             },
             categoryImage: Images[props.index],
             tabIndex: props.index,
-            animation: new Animated.Value(140)
+            animation: new Animated.Value(200),
+            ImageHeight: 200
             
         };    
     }  
@@ -67,6 +68,7 @@ class ServiceTap extends React.Component {
     }
 
     onLoadServiceTab(tab) {
+            this.setState({ImageHeight: 200, animation: new Animated.Value(200)})
             this.setState({categoryImage: Images[tab.i], tabIndex: tab.i});
             this.setState({navigationState: 
             {index: tab.i,
@@ -84,67 +86,65 @@ class ServiceTap extends React.Component {
                 tabview.setState({index: index})    
             });
             
-    }
-
-    onScroll(event) {
-        var currentOffset = event.nativeEvent.contentOffset.y;
-        var direction = currentOffset > this.offset ? 'down' : 'up';
-        this.offset = currentOffset;
-        alert(direction)
+            
     }
 
     render() {
         var _this = this;
         return (
-            <View style={{flex: 1, backgroundColor: 'black', position: 'relative'}}>
+            <View style={{flex: 1, backgroundColor: 'white', position: 'relative'}}>
                 {Platform.OS === 'android'?
                 null:
                 <View style={{height: 24, position: 'absolute', top: 0, left: 0, width: width, backgroundColor: '#ffffff', opacity: 0.7}}/>
                 }                
-                <View style={style.serviceImageView}>
-                    <Image style={style.serviceImage} source={this.state.categoryImage}>
-                    </Image>
-                    <TouchableOpacity style={style.backButtonView} onPress={() => {Actions.pop()}}>
-                        <Image style={style.backButton} source={back_white}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={style.searchButtonView} onPress={() => {
-                        Actions.searchview({category: _this.state.navigationState.routes[_this.state.tabIndex].title});
-                    }}>
-                        <Image source={search} style={style.searchButton}/>
-                    </TouchableOpacity>   
-                </View>
-                <Animated.View style={{marginTop: this.state.animation, flex: 1}}>
+                
+                
+                
+                <View style={{flex: 1}}>
                 <ScrollableTabView 
-                        renderTabBar={() => <ScrollableTabBar style={{padding: 8, height: 60}}/>}
+                        renderTabBar={() => <ScrollableTabBar style={{padding: 5, height: 60, position: 'absolute', top: _this.state.ImageHeight - 60}}/>}
                         initialPage={this.props.index}
                         tabBarUnderlineStyle={{borderColor:'white', backgroundColor: 'white', justifyContent: 'center'}}
                         onChangeTab={(tab)=>{this.onLoadServiceTab(tab)}}
                         tabBarActiveTextColor='#ffffff'
                         tabBarInactiveTextColor='#ababab'
-                        tabBarTextStyle={{fontWeight: 'bold', fontSize: 16}}
-                        style={{backgroundColor: 'transparent', marginTop: 0, alignItems: 'center'}}>
+                        tabBarTextStyle={{fontWeight: 'bold', fontSize: 16, backgroundColor: 'transparent'}}
+                        tabBarPosition="bottom"
+                        style={{backgroundColor: 'white', marginTop: 0, alignItems: 'center', position: 'relative', flex: 1}}>
                         {
                             this.state.navigationState.routes.map(function(route, index){
                                 return(
-                                    <DetailedServiceView 
-                                    onScroll={(value) => {
-                                        
-                                        Animated.spring(
-                                            _this.state.animation,
-                                            {
-                                                toValue: value,
-                                                friction: 1,
-                                            }
-                                        ).start();value
-                                        _this.setState({animation: new Animated.Value(value)})    
-                                    }}
-                                    tabLabel={route.title} name={route.title} key={route.key} index={route.key} handle={_this}/>
+                                    <View tabLabel={route.title} key={route.key} style={{flex:1, backgroundColor: 'black'}}>
+                                        <Animated.Image style={{width: width, height: _this.state.animation, opacity:0.5}} source={_this.state.categoryImage}>
+                                        </Animated.Image>
+                                        <DetailedServiceView 
+                                        onScroll={(value) => {
+                                            
+                                            Animated.spring(
+                                                _this.state.animation,
+                                                {
+                                                    toValue: value + 60,
+                                                    friction: 1,
+                                                }
+                                            ).start();value
+                                            _this.setState({animation: new Animated.Value(60 + value)})
+                                            _this.setState({ImageHeight: 60 + value})
+                                        }}
+                                        tabLabel={route.title} name={route.title} key={route.key} index={route.key} handle={_this}/>
+                                    </View>
                                 )
                             })
                         }               
                 </ScrollableTabView>
-                </Animated.View>
-                  
+                </View>
+                <TouchableOpacity style={style.backButtonView} onPress={() => {Actions.pop()}}>
+                    <Image style={style.backButton} source={back_white}/>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.searchButtonView} onPress={() => {
+                    Actions.searchview({category: _this.state.navigationState.routes[_this.state.tabIndex].title});
+                }}>
+                    <Image source={search} style={style.searchButton}/>
+                </TouchableOpacity>   
             
         </View>
         );

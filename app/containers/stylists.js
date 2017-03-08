@@ -21,7 +21,8 @@ const {
   Image,
   Button,
   ListView,
-  Dimensions
+  Dimensions,
+  ScrollView
 } = ReactNative;
 var style = require('../styles/stylists');
 var gstyle = require('../styles/gstyle'); 
@@ -44,6 +45,36 @@ var userdatas = [
                     name: 'Nicklas Olsson',
                     image: User1,
                     active: true
+                },
+                {
+                    name: 'Julia Cabania',
+                    image: User2,
+                    active: false
+                },
+                {
+                    name: 'Jake Andreson',
+                    image: User3,
+                    active: true
+                },
+                {
+                    name: 'Joris Loos',
+                    image: User4,
+                    active: false
+                },
+                {
+                    name: 'Julia Cabania',
+                    image: User2,
+                    active: false
+                },
+                {
+                    name: 'Jake Andreson',
+                    image: User3,
+                    active: true
+                },
+                {
+                    name: 'Joris Loos',
+                    image: User4,
+                    active: false
                 },
                 {
                     name: 'Julia Cabania',
@@ -93,6 +124,7 @@ class Stylists extends React.Component {
     }
 
     render() {
+        var _this = this;
         return(
             <View style={style.background}>
                 <NavBar height={54} title='Stylist' textColor='#47556c' source={back} bgColor='transparent'/>
@@ -103,61 +135,59 @@ class Stylists extends React.Component {
                         userdatas.length == 0?
                             this.showEmptyView()
                         :
-                            <ListView
-                                dataSource = {this.state.dataSource}
-                                enableEmptySections = {true}
-                                renderRow = {(rowData, sectionID, rowID, highlightRow) => {
+                            <ScrollView contentContainerStyle={{paddingBottom: 80}}>
+                                    {
+                                        userdatas.map(function(item, index){
+                                            return(            
+                                                <View style={style.listItem} key={index}> 
+                                                    <Panel title={_this.ListItemHeader(item)} data={item} handle={_this}>
+                                                
+                                                        <View style={{flexDirection: 'row',height: 48}}>
+
+                                                            <View style={{flex: 0.2, borderTopWidth: 0.5,justifyContent: 'center', alignItems: 'center', borderRightWidth: 0.5, borderColor: '#ababab'}}>
+                                                                <TouchableOpacity onPress={() => {_this.onEditService(item)}}>
+                                                                    <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                                                                        <Image style={style.iconImage} source={edit_service}/>
+                                                                        <Text style={style.iconText}>EDIT</Text>
+                                                                    </View>
+                                                                </TouchableOpacity>
+                                                            </View>
+
+                                                            <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
+                                                                <TouchableOpacity onPress={() => {_this.onDeleteConfirm(item)}}>
+                                                                    <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                                                                        <Image style={style.iconImage} source={delete_service}/>
+                                                                        <Text style={[style.iconText, {color: 'red'}]}>DELETE</Text>
+                                                                    </View>
+                                                                </TouchableOpacity>
+                                                            </View>
+
+                                                            <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderColor: '#ababab'}}>
+                                                                    <Text style={style.switchText}>{item.active?'AVAILABLE':'UNAVILABLE'}</Text>
+                                                                    <View style={style.SwitchView}>
+                                                                        <SwitchView 
+                                                                            switchWidth={22}
+                                                                            switchHeight={8}
+                                                                            buttonRadius={7}
+                                                                            activeButtonColor='#1FbF55'
+                                                                            inactiveButtonColor='#rgba(200,200,200,.7)'
+                                                                            activeSwitchColor='#8FDFAA' 
+                                                                            inactiveSwitchColor='#rgba(200,200,200,.4)'
+                                                                            active={item.active}
+                                                                            onPress={(state)=>{_this.onChangeCategoryActiveState(index, state)}}
+                                                                            />
+                                                                    </View>                                                    
+                                                            </View>
+                                                        </View>     
+                                                    
+                                                    </Panel>
+                                                </View>
+                                            );
+                                        })
+                                    }
+
                                     
-
-                                    return(            
-                                        <View style={style.listItem}> 
-                                            <Panel title={this.ListItemHeader(rowData)} data={rowData} handle={this}>
-                                        
-                                                <View style={{flexDirection: 'row',height: 48}}>
-
-                                                    <View style={{flex: 0.2, borderTopWidth: 0.5,justifyContent: 'center', alignItems: 'center', borderRightWidth: 0.5, borderColor: '#ababab'}}>
-                                                        <TouchableOpacity onPress={() => {this.onEditService(rowData)}}>
-                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                                                                <Image style={style.iconImage} source={edit_service}/>
-                                                                <Text style={style.iconText}>EDIT</Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-
-                                                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
-                                                        <TouchableOpacity onPress={() => {this.onDeleteConfirm(rowData)}}>
-                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                                                                <Image style={style.iconImage} source={delete_service}/>
-                                                                <Text style={[style.iconText, {color: 'red'}]}>DELETE</Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-
-                                                    <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderColor: '#ababab'}}>
-                                                            <Text style={style.switchText}>{rowData.active?'AVAILABLE':'UNAVILABLE'}</Text>
-                                                            <View style={style.SwitchView}>
-                                                                <SwitchView 
-                                                                    switchWidth={22}
-                                                                    switchHeight={8}
-                                                                    buttonRadius={7}
-                                                                    activeButtonColor='#1FbF55'
-                                                                    inactiveButtonColor='#rgba(200,200,200,.7)'
-                                                                    activeSwitchColor='#8FDFAA' 
-                                                                    inactiveSwitchColor='#rgba(200,200,200,.4)'
-                                                                    active={rowData.active}
-                                                                    onPress={(state)=>{this.onChangeCategoryActiveState(rowID, state)}}
-                                                                    />
-                                                            </View>                                                    
-                                                    </View>
-                                                </View>     
-                                            
-                                            </Panel>
-                                        </View>
-                                    );
-                                }
-                    
-                                }>
-                        </ListView>
+                            </ScrollView>
                     }
                     
                 </View>

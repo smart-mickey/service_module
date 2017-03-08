@@ -105,7 +105,6 @@ class DetailedServiceView extends React.Component {
 
     componentDidMount() {
         this._setDataList(service_data);
-        this._handleResults = this._handleResults.bind(this); 
         this.state.parent.TabView[this.state.index] = this;
     }
 
@@ -113,16 +112,6 @@ class DetailedServiceView extends React.Component {
         this.setState({Datas: data});
         this.setState({dataSource: ds.cloneWithRows(data)});
     }
-
-    _handleResults(results) {
-        alert('')
-        var filtered_services = [];
-        service_data.map(function(item, index){
-            if(results.indexOf(item.name) > -1) filtered_services.push(item);
-        });
-        this._setDataList(filtered_services)
-    }
-
 
     ListItemHeader(rowData) {
         return(
@@ -145,65 +134,6 @@ class DetailedServiceView extends React.Component {
               
         )
     }
-
-    renderItem(rowData, rowID) {
-                return(
-                            <View style={style.serviceCard}>
-                                <Panel title={this.ListItemHeader(rowData)} data={rowData} handle={this}>
-                                    
-                                    
-                                    <View style={{flexDirection: 'row',height: 48}}>
-
-                                                    <View style={{flex: 0.2, borderTopWidth: 0.5,justifyContent: 'center', alignItems: 'center', borderRightWidth: 0.5, borderColor: '#ababab'}}>
-                                                        <TouchableOpacity onPress={() => {this.onEditService(rowData)}}>
-                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                                                                <Image style={style.iconImage} source={edit_service}/>
-                                                                <Text style={style.iconText}>EDIT</Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-
-                                                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderRightWidth: 0.5, borderColor: '#ababab'}}>
-                                                        <TouchableOpacity onPress={() => {this.onDeleteConfirm(rowData)}}>
-                                                            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                                                                <Image style={style.iconImage} source={delete_service}/>
-                                                                <Text style={[style.iconText, {color: 'red'}]}>DELETE</Text>
-                                                            </View>
-                                                        </TouchableOpacity>
-                                                    </View>
-
-                                                    <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', borderTopWidth: 0.5, borderColor: '#ababab'}}>
-                                                            <Text style={style.switchText}>{rowData.active?'AVAILABLE':'UNAVILABLE'}</Text>
-                                                            <View style={style.SwitchView}>
-                                                                <SwitchView 
-                                                                    switchWidth={22}
-                                                                    switchHeight={8}
-                                                                    buttonRadius={7}
-                                                                    activeButtonColor='#1FbF55'
-                                                                    inactiveButtonColor='#rgba(200,200,200,.7)'
-                                                                    activeSwitchColor='#8FDFAA' 
-                                                                    inactiveSwitchColor='#rgba(200,200,200,.4)'
-                                                                    active={rowData.active}
-                                                                    onPress={(state)=>{this.onChangeCategoryActiveState(rowID, state)}}
-                                                                    />
-                                                            </View>                                                    
-                                                    </View>
-                                                </View>     
-                                  
-                                </Panel>
-                            </View>
-
-                )
-                        
-    }
-
-    onScroll(event) {
-        var currentOffset = event.nativeEvent.contentOffset.y;
-        var direction = currentOffset > this.state.offset ? 'down' : 'up';
-        this.setState({offset: currentOffset});
-        alert(currentOffset)
-    }
-
 
     render() {
         var _this = this;
@@ -234,7 +164,7 @@ class DetailedServiceView extends React.Component {
                         }
                         _this.setState({offset: currentOffset});
                     }} 
-                    style={{paddingBottom: 80}}
+                    contentContainerStyle={{paddingBottom: 80}}
                     automaticallyAdjustContentInsets={false}
                 >
                     {
