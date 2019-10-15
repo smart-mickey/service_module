@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-const ReactNative = require('react-native');
+import React from 'react';
 import {Actions} from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import Modal from 'react-native-simple-modal';
-import NavigationBar from 'react-native-navbar';
 import ModalDropdown from 'react-native-modal-dropdown';
 import NavBar from '../components/navbar';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
+
+const ReactNative = require('react-native');
 
 const {
   Alert,
