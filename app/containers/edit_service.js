@@ -4,8 +4,6 @@ import {Actions} from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
-import Modal from 'react-native-simple-modal';
-import NavigationBar from 'react-native-navbar';
 import ModalDropdown from 'react-native-modal-dropdown';
 import NavBar from '../components/navbar';
 import {Keyboard} from 'react-native';
