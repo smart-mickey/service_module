@@ -19,7 +19,6 @@ const {
 } = ReactNative;
 
 var style = require('../styles/edit_service');
-var gstyle = require('../styles/gstyle'); 
 var width = Dimensions.get('window').width;
 var back_white = require('../images/back_white.png');
 
