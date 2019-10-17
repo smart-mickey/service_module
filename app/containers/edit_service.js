@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 const ReactNative = require('react-native');
 import {Actions} from 'react-native-router-flux'
 import { connect } from 'react-redux'
