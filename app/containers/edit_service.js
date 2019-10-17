@@ -10,16 +10,11 @@ import {Keyboard} from 'react-native';
 import { KeyboardAwareView } from 'react-native-keyboard-aware-view'
 
 const {
-  Alert,
   TextInput,
   View,
   Text,
   TouchableOpacity,
-  Image,
-  Button,
-  ListViewm,
   Dimensions,
-  DeviceEventEmitter,
   Animated
 } = ReactNative;
 
