@@ -37,7 +37,6 @@ var last = require('../images/add_new_service_category.png');
 
 var datas = ['Hair Cut', 'Hair Spa', 'Facial', 'Makeup', 'Beard', 'Nails'];
 const ds = new GridView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,});
-var SHOWS_PER_ROW = 2
 var services = [
                 {
                     key: 0,
@@ -100,7 +99,6 @@ class Manage_Service extends React.Component {
   }  
 
   componentDidMount() {
-      //this.fetchData();
       this.searchBar.hide();
   }  
 
@@ -129,8 +127,6 @@ class Manage_Service extends React.Component {
   }
   
   render() {
-    var _this = this;
-    
     return (
         <View style={{flex: 1, backgroundColor: '#f3f7f8'}}>
 
