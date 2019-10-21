@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 const ReactNative = require('react-native');
 import {Actions} from 'react-native-router-flux'
 import { connect } from 'react-redux'
@@ -21,10 +21,7 @@ const {
   Dimensions
 } = ReactNative;
 
-var Global = require('../Global');
 var style = require('../styles/manage_service');
-var gstyle = require('../styles/gstyle'); 
-var image = require('../images/login.jpg');
 var search = require('../images/search.png');
 var edit_category = require('../images/edit_category.png');
 var delete_category = require('../images/delete_category.png');
