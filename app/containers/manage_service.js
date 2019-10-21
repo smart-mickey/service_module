@@ -6,18 +6,14 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from '../actions'
 import GridView from 'react-native-easy-grid-view'
 import Modal from 'react-native-simple-modal';
-import Switch from 'react-native-material-switch';
 import SearchBar from 'react-native-searchbar'
 import SwitchView from '../components/switch'
 const {
-  Alert,
   TextInput,
   View,
   Text,
   TouchableOpacity,
   Image,
-  Button,
-  ListView,
   Dimensions
 } = ReactNative;
 
