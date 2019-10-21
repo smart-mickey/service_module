@@ -258,9 +258,6 @@ class Edit_Service extends React.Component {
             if(numbers.indexOf(text[i]) > -1){
                   newText = newText + text[i];
             }
-            else {
-                  // your call back function
-            }
         }
         return newText;
     }
