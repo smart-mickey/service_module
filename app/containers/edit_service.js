@@ -203,9 +203,6 @@ class Edit_Service extends React.Component {
                             <View style={{flex: 1, flexDirection: 'row', borderLeftWidth: 0.5, borderColor: '#ababab', marginTop: 5}}>
                                 <View style={{flex: 0.33}}>
                                         {
-                                            /*<View style={{flex: 0.33}}>
-                                                    <MarkButton text='All' border={[0,1]} borderColor='#ababab' textColor='#d3dce8' markColor='#b900f0' markWidth={4} mark={this.state.userType == 'all'?true:false} onPress={() => {this.setState({userType: 'all'})}} />
-                                            </View>*/
                                           this.state.userType == 'all'?
                                           <TouchableOpacity style={style.selectedType} onPress={() => {this.setState({userType: 'all'})}}>
                                               <Text style={style.selectedTypeText}>All</Text>
