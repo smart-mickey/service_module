@@ -129,7 +129,6 @@ class Manage_Service extends React.Component {
   render() {
     return (
         <View style={{flex: 1, backgroundColor: '#f3f7f8'}}>
-
             <View style={style.Header}>
                 <View style={{flex: 0.5}}>
                     <TouchableOpacity onPress={() => {alert('Go back!')}}>
@@ -149,8 +148,6 @@ class Manage_Service extends React.Component {
                         <Image source={search} style={style.searchImage}/>
                     </TouchableOpacity>
                 </View>
-                
-                
             </View>
             <SearchBar
                     ref={(ref) => this.searchBar = ref}
